@@ -3,6 +3,7 @@ import './App.css';
 import Post from './post';
 import { db } from './firebase';
 import Modal from './modal';
+import Sidebar from './sidebar';
 
 function App() {
 
@@ -38,12 +39,15 @@ function App() {
         </div>
       </div>
       <div className="container d-flex h-100">
-        <div className="col-8">
+        <div className="col-8 mb-1r">
         {
           posts.map(({ id, post }) => (
             <Post key={id} user={post.user} image={post.image} caption={post.caption}/>
           ))
         }
+        </div>
+        <div className="col-4 mb-1r">
+          <Sidebar/>
         </div>
       </div>
       <Modal open={open} setOpen={setOpen}/>

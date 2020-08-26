@@ -9,6 +9,8 @@ function App() {
 
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     db.collection('posts').onSnapshot(snapshot => {
@@ -47,10 +49,10 @@ function App() {
         }
         </div>
         <div className="col-4 mb-1r">
-          <Sidebar/>
+          <Sidebar user={email.length > 0 ? email.substring(0, email.indexOf('@')) : "Guest"}/>
         </div>
       </div>
-      <Modal open={open} setOpen={setOpen}/>
+      <Modal open={open} setOpen={setOpen} email={email} setEmail={setEmail} password={password} setPassword={setPassword}/>
     </div>
   );
 }

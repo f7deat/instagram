@@ -1,0 +1,23 @@
+.btn-upload {
+    border: 0;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    transition: border-color 0.5s ease;
+}
+.btn-upload:hover {
+    border: 1px dashed #d1d1d1;
+}
+.progress {
+    margin-bottom: 10px;
+    height: 20px;
+    background-color: #eee;
+    position: relative;
+}
+.progress-bar {
+    z-index: 10;
+    background-color: tomato;
+    height: 20px;
+    position: absolute;
+}

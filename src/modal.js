@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import './css/modal.css';
 import { auth } from './firebase';
 
-function Modal({ open, setOpen }) {
+function Modal({ open, setOpen, email, setEmail, password, setPassword }) {
 
-    const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [email, setEmail] = useState('');
     const [isSignUp, setIsSignUp] = useState(false);
     const [error, setError] = useState('');
 
@@ -27,6 +25,10 @@ function Modal({ open, setOpen }) {
         if (comparePassword()) {
             auth
             .createUserWithEmailAndPassword(email, password)
+            .then((authUer) => {
+                console.log(authUer);
+                setOpen(false);
+            })
             .catch((error) => {
                 setError(error.message);
             })

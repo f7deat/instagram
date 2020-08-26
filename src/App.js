@@ -46,7 +46,7 @@ function App() {
         }
         </div>
       </div>
-      <Modal open={open} onClick={setOpen}/>
+      <Modal open={open} setOpen={setOpen}/>
     </div>
   );
 }

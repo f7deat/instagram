@@ -1,27 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './css/modal.css';
 
-function Modal({ open, onClick }) {
+function Modal({ open, setOpen }) {
 
-    const signUp = (event) => {
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+
+    const signIn = () => {
 
     }
 
     return (
-        <div className="d-flex h-100">
-            <div className={open ? "modal shadow show" : "modal shadow"}>
+        <div className={open ? "modal show" : "modal d-none"}>
+            <div className="modal-dialog shadow">
                 <div className="modal-title">
                     Login
                 </div>
                 <div className="modal-body">
-                    <input type="text" className="form-control mb-1r" placeholder="Username"/>
-                    <input type="password" className="form-control" placeholder="Password"/>
+                    <input type="email" className="form-control mb-1r" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                 </div>
-                <div className="modal-footer text-right">
-                    <button className="btn btn-primary" onClick={() => onClick(false)}>Cancel</button>
-                    <button className="btn btn-primary" onClick={() => signUp()}>Login</button>
+                <div className="modal-footer d-flex">
+                    <div className="flex-grow-1">
+                        <button className="btn btn-primary">Register</button>
+                    </div>
+                    <div className="">
+                        <button className="btn btn-primary mr-1r" onClick={() => setOpen(false)}>Cancel</button>
+                        <button className="btn btn-primary" onClick={() => signIn()}>Login</button>
+                    </div>
                 </div>
             </div>
         </div>
     )
 }
+
 export default Modal

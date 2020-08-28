@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './css/modal.css';
 import { auth } from './firebase';
 
-function Modal({ open, setOpen, email, setEmail, password, setPassword }) {
+function Modal({ open, setOpen, email, setEmail, password, setPassword, setUser }) {
 
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isSignUp, setIsSignUp] = useState(false);
@@ -12,6 +12,10 @@ function Modal({ open, setOpen, email, setEmail, password, setPassword }) {
         if (email && password) {
             auth
             .signInWithEmailAndPassword(email, password)
+            .then(() => {
+                setOpen(false);
+                setUser(email.substring(0, email.indexOf("@")));
+            })
             .catch((error) => {
                 setError(error.message);
             })
@@ -25,8 +29,7 @@ function Modal({ open, setOpen, email, setEmail, password, setPassword }) {
         if (comparePassword()) {
             auth
             .createUserWithEmailAndPassword(email, password)
-            .then((authUer) => {
-                console.log(authUer);
+            .then(() => {
                 setOpen(false);
             })
             .catch((error) => {

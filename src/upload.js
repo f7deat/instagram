@@ -9,8 +9,8 @@ function Upload(user) {
     const [progress, setProgress] = useState(0);
 
     const handleChange = (e) => {
-        if (e.target.file[0]) {
-            setImage(e.target.file[0]);
+        if (e.target.files[0]) {
+            setImage(e.target.files[0]);
         }
     }
 
@@ -25,15 +25,18 @@ function Upload(user) {
             (error) => alert(error.message),
             () => {
                 storage
-                .ref('images')
+                .ref('image')
                 .child(image.name)
                 .getDownloadURL()
                 .then((url) => {
-                    db.collection(`posts`).add({
+                    debugger
+                    db.collection("posts").add({
                         caption: caption,
                         image: url,
-                        user: user
-                    })
+                        user: user.user.user
+                    });
+                    setProgress(0);
+                    setImage(null);
                 })
             }
         )
@@ -46,7 +49,7 @@ function Upload(user) {
             <div className="progress">
                 <div className="progress-bar" style={{width: progress + '%'}}></div>
             </div>
-            <button className="btn-upload" onChange={handleUpload} disabled>Upload</button>
+            <button className="btn-upload" onClick={handleUpload} disabled={(user.user.user !== 'Guest') ? false : true}>Upload</button>
         </div>
     )
 }

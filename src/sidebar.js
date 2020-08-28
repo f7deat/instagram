@@ -3,7 +3,6 @@ import './css/sidebar.css';
 import Upload from './upload';
 
 function Sidebar(user) {
-    console.log(user)
     return (
         <div className="sidebar">
             <div className="sidebar-item shadow">
